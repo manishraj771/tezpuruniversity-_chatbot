@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    container_name: chatbot_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./test.db
+  rasa:
+    image: rasa/rasa:latest
+    ports:
+      - "5005:5005"
+    command: ["run", "--enable-api", "--cors", "*"]
+
+  frontend:
+    build: ./frontend
+    container_name: chatbot_frontend
+    ports:
+      - "3000:3000"  # Maps frontend port 3000 in the container to 3000 on your machine
+
+# Optional: Add Rasa as a separate service if used
+#   rasa:
+#     image: rasa/rasa:latest
+#     container_name: rasa_server
+#     ports:
+#       - "5005:5005"
+#     command: ["run", "--enable-api", "--cors", "*"]

@@ -1,0 +1,7 @@
+# Ignore virtual environment folder
+.venv/
+
+# Ignore other unnecessary files
+*.log
+__pycache__/
+node_modules/
